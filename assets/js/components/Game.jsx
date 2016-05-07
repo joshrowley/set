@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var React = require('react');
+var Card = require('./Card.jsx');
 
 var Game = React.createClass({
   getInitialState: function () {
@@ -34,12 +35,7 @@ var Game = React.createClass({
   render: function() {
     var cards = _.map(this.state.cards, function (card) {
       return(
-        <ul>
-          <li>Number: { card.number }</li>
-          <li>Symbol: { card.symbol }</li>
-          <li>Shading: { card.shading }</li>
-          <li>Color: { card.color }</li>
-        </ul>
+        <Card number={ card.number } symbol={ card.symbol } shading={ card.shading } color={ card.color } />
       );
     });
 
