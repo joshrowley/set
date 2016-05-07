@@ -9,11 +9,11 @@ var Game = React.createClass({
     var shading = ['solid', 'striped', 'open'];
     var colors  = ['red', 'green', 'purple'];
 
-    var cards = _.shuffle(_.reduce(numbers, function (cards, number) {
+    var deck = _.shuffle(_.reduce(numbers, function (deck, number) {
       _.each(symbols, function (symbol) {
         _.each(shading, function (shading) {
           _.each(colors, function (color) {
-            cards.push({
+            deck.push({
               number: number,
               symbol: symbol,
               shading: shading,
@@ -23,17 +23,19 @@ var Game = React.createClass({
         });
       });
 
-      return cards;
+      return deck;
     }, []));
 
+    var board = deck.splice(0, 12);
 
     return {
-      cards: cards
+      deck: deck,
+      board: board
     };
   },
 
   render: function() {
-    var cards = _.map(this.state.cards, function (card) {
+    var board = _.map(this.state.board, function (card) {
       return(
         <Card number={ card.number } symbol={ card.symbol } shading={ card.shading } color={ card.color } />
       );
@@ -41,7 +43,8 @@ var Game = React.createClass({
 
     return (
       <div>
-        { cards }
+        Cards remaining: { this.state.deck.length }
+        { board }
       </div>
     );
   }
