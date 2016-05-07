@@ -6,6 +6,8 @@ var Main = React.createClass({
     return (
       <div>
         <Card login='joshrowley'/>
+        <Card login='snags88'/>
+        <Card login='adamjonas'/>
       </div>
     );
   }
