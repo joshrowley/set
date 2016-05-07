@@ -1,5 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var HelloWorld = require('./components/HelloWorld.jsx');
+var Game = require('./components/Game.jsx');
 
-ReactDOM.render(<HelloWorld />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.getElementById('root'));
