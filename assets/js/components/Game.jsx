@@ -40,11 +40,13 @@ var Game = React.createClass({
   },
 
   selectCard: function (cardID) {
-    this.state.selectedCards.push(cardID);
+    if (this.state.selectedCards.length < 3) {
+      this.state.selectedCards.push(cardID);
 
-    this.setState({
-      selectedCards: this.state.selectedCards
-    });
+      this.setState({
+        selectedCards: this.state.selectedCards
+      });
+    }
   },
 
   render: function() {
