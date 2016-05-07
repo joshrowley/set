@@ -39,21 +39,32 @@ var Game = React.createClass({
     };
   },
 
-  selectCard: function (cardID) {
-    if (this.state.selectedCards.length < 3) {
+  toggleCard: function (cardID) {
+    if (_.includes(this.state.selectedCards, cardID)) {
+      var cards = _.clone(this.state.selectedCards);
+
+      _.remove(cards, function (id) {
+        return id === cardID;
+      });
+
+      this.setState({
+        selectedCards: cards
+      });
+    } else if (this.state.selectedCards.length < 3) {
       this.state.selectedCards.push(cardID);
 
       this.setState({
         selectedCards: this.state.selectedCards
       });
     }
+
   },
 
   render: function() {
     return (
       <div>
         Cards remaining: { this.state.deck.length }
-        <Board board={ this.state.board } selectCard={ this.selectCard } selectedCards={ this.state.selectedCards }/>
+        <Board board={ this.state.board } toggleCard={ this.toggleCard } selectedCards={ this.state.selectedCards }/>
       </div>
     );
   }

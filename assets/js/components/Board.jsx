@@ -2,8 +2,8 @@ var React = require('react');
 var Card  = require('./Card.jsx');
 
 var Board = React.createClass({
-  selectCard: function (cardID) {
-    this.props.selectCard(cardID);
+  toggleCard: function (cardID) {
+    this.props.toggleCard(cardID);
   },
 
   render: function () {
@@ -11,7 +11,11 @@ var Board = React.createClass({
 
     var board = _.map(this.props.board, function (card) {
       return(
-        <Card key={ card.id } card={ card } selectCard={ component.selectCard } selectedCards={ component.props.selectedCards }/>
+        <Card key={ card.id }
+              card={ card }
+              selectedCards={ component.props.selectedCards } 
+              toggleCard={ component.props.toggleCard }
+        />
       );
     });
 

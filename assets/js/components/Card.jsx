@@ -3,7 +3,7 @@ var React = require('react');
 
 var Card = React.createClass({
   handleClick: function () {
-    this.props.selectCard(this.props.card.id);
+    this.props.toggleCard(this.props.card.id);
   },
 
   render: function () {
