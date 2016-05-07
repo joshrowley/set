@@ -1,5 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Button = require('./components/Button.jsx');
+var Main = require('./components/Main.jsx');
 
-ReactDOM.render(<Button />, document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById('root'));

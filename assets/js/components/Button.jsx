@@ -1,21 +1,13 @@
 var React = require('react');
 
 var Button = React.createClass({
-  getInitialState: function () {
-    return {
-      counter: 0
-    };
-  },
-
-  handleClick: function () {
-    this.setState({
-      counter: this.state.counter + 1
-    });
+  localHandleClick: function () {
+    this.props.localHandleClick(this.props.increment);
   },
 
   render: function () {
     return (
-      <button onClick={this.handleClick}>{ this.state.counter }</button>
+      <button onClick={ this.localHandleClick }>+{ this.props.increment }</button>
     );
   }
 });
