@@ -4,13 +4,24 @@
   "dependencies": {
     "autoprefixer-stylus": "0.8.x",
     "axis": "0.5.x",
-    "coffee-script": "^1.0.0",
     "css-pipeline": "0.3.x",
-    "jade": "^1.0.0",
-    "js-pipeline": "0.2.x",
-    "jstransformer-marked": "^1.0.0",
+    "jade": "1.0.0",
     "marked": "0.3.x",
+    "react": "15.0.2",
+    "react-dom": "15.0.2",
+    "reactify": "1.1.1",
+    "roots-browserify": "0.5.0",
     "rupture": "0.6.x",
     "stylus": "0.52.x"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
   }
 }
