@@ -63,8 +63,14 @@ var Game = React.createClass({
   render: function() {
     return (
       <div>
-        Cards remaining: { this.state.deck.length }
-        <Board board={ this.state.board } toggleCard={ this.toggleCard } selectedCards={ this.state.selectedCards }/>
+        <p>
+          Cards remaining: { this.state.deck.length }
+        </p>
+        <Board 
+          board={ this.state.board }
+          toggleCard={ this.toggleCard }
+          selectedCards={ this.state.selectedCards }
+        />
       </div>
     );
   }

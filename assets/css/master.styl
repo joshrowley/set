@@ -11,3 +11,61 @@ body
 
 ul
   cursor: pointer
+
+li
+  width: 200px
+  height: 100px
+
+.red
+  color: red
+
+.bg-red
+  background-color: red
+  border-bottom-color: red
+
+  &:after
+    border-top-color: red
+
+.green
+  color: green
+
+.bg-green
+  background-color: green
+  border-bottom-color: green
+
+  &:after
+    border-top-color: green
+
+.purple
+  color: purple
+
+.bg-purple
+  background-color: purple
+  border-bottom-color: purple
+
+  &:after
+    border-top-color: purple
+
+.oval
+  border-radius: 50% 50%
+
+.diamond
+  width: 0
+  height: 0
+  border: 50px solid
+  border-top-color: transparent
+  border-left-color: transparent
+  border-right-color: transparent
+  border-bottom: 70px solid
+  position: relative
+  top: -50px
+
+  &:after
+    content: ''
+    position: absolute
+    left: -50px
+    top: 70px
+    width: 0
+    height: 0
+    border: 50px solid transparent
+    border-top: 70px solid
