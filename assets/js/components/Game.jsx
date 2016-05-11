@@ -2,19 +2,24 @@ var _ = require('lodash');
 var React = require('react');
 var Board = require('./Board.jsx');
 
+var settings = {
+  card_attributes: {
+    number: [1, 2, 3],
+    symbol: ['diamond', 'squiggle', 'oval'],
+    shading: ['solid', 'striped', 'open'],
+    color: ['red', 'green', 'purple']
+  }
+}
+
 var Game = React.createClass({
   getInitialState: function () {
-    var numbers = [1, 2, 3];
-    var symbols = ['diamond', 'squiggle', 'oval'];
-    var shading = ['solid', 'striped', 'open'];
-    var colors  = ['red', 'green', 'purple'];
 
     var id = 0;
 
-    var deck = _.shuffle(_.reduce(numbers, function (deck, number, i) {
-      _.each(symbols, function (symbol) {
-        _.each(shading, function (shading) {
-          _.each(colors, function (color) {
+    var deck = _.reduce(settings.card_attributes.number, function (deck, number, i) {
+      _.each(settings.card_attributes.symbol, function (symbol) {
+        _.each(settings.card_attributes.shading, function (shading) {
+          _.each(settings.card_attributes.color, function (color) {
             id = id + 1;
             deck.push({
               id: id,
@@ -28,7 +33,7 @@ var Game = React.createClass({
       });
 
       return deck;
-    }, []));
+    }, []);
 
     var board = deck.splice(0, 12);
 
@@ -40,24 +45,35 @@ var Game = React.createClass({
   },
 
   toggleCard: function (cardID) {
-    if (_.includes(this.state.selectedCards, cardID)) {
-      var cards = _.clone(this.state.selectedCards);
+    var selectedCards = _.clone(this.state.selectedCards);
+    var board = _.clone(this.state.board);
 
-      _.remove(cards, function (id) {
-        return id === cardID;
-      });
-
-      this.setState({
-        selectedCards: cards
-      });
-    } else if (this.state.selectedCards.length < 3) {
-      this.state.selectedCards.push(cardID);
-
-      this.setState({
-        selectedCards: this.state.selectedCards
-      });
+    if (_.includes(selectedCards, cardID)) {
+      _.remove(selectedCards, function (id) { return id === cardID; });
+    } else if (selectedCards.length < 3) {
+      selectedCards.push(cardID);
     }
 
+
+    if (selectedCards.length === 3) {
+      // check if match
+      var cards = _.filter(board, function(card) { return _.includes(selectedCards, card.id) });
+
+      var validSet = _.every(_.keys(settings.card_attributes), function (attribute) {
+        return _.uniq(_.map(cards, attribute)).length !== 2;
+      });
+
+      if (validSet) {
+        console.log('match!');
+      } else {
+        console.log('not a match!');
+      }
+    }
+
+    this.setState({
+      board: board,
+      selectedCards: selectedCards
+    });
   },
 
   render: function() {
