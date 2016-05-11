@@ -40,13 +40,18 @@ var Game = React.createClass({
     return {
       deck: deck,
       board: board,
-      selectedCards: []
+      selectedCards: [],
+      sets: [],
+      flash: 'Welcome to Set'
     };
   },
 
   toggleCard: function (cardID) {
+    var deck = _.clone(this.state.deck);
     var selectedCards = _.clone(this.state.selectedCards);
     var board = _.clone(this.state.board);
+    var sets = _.clone(this.state.set);
+    var flash = '\u00A0';
 
     if (_.includes(selectedCards, cardID)) {
       _.remove(selectedCards, function (id) { return id === cardID; });
@@ -64,21 +69,29 @@ var Game = React.createClass({
       });
 
       if (validSet) {
-        console.log('match!');
+        _.remove(board, function (card) { return _.includes(cards, card); })
+        selectedCards = [];
+        board = board.concat(deck.splice(0, 3));
+        flash = 'Good match!'
       } else {
-        console.log('not a match!');
+        selectedCards = [];
+        flash = 'Not a match!'
       }
     }
 
     this.setState({
       board: board,
-      selectedCards: selectedCards
+      selectedCards: selectedCards,
+      sets: sets,
+      deck: deck,
+      flash: flash
     });
   },
 
   render: function() {
     return (
       <div>
+        <h1>{ this.state.flash }</h1>
         Cards remaining: { this.state.deck.length }
         <Board board={ this.state.board } toggleCard={ this.toggleCard } selectedCards={ this.state.selectedCards }/>
       </div>
